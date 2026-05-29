@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Recepción Detailing Pro</title>
+    <!-- Tailwind CSS para diseño rápido y limpio -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome para los iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body { -webkit-tap-highlight-color: transparent; background-color: #0f172a; }
@@ -14,6 +16,7 @@
 </head>
 <body class="text-slate-200 min-h-screen pb-10">
 
+    <!-- CABECERA -->
     <header class="bg-slate-900 border-b border-slate-800 p-4 text-center shadow-lg">
         <h1 class="text-xl font-bold tracking-wider text-green-400"><i class="fa-solid fa-wand-magic-sparkles mr-2"></i>DETAILING PRO</h1>
         <p class="text-xs text-slate-400 mt-1">Recepción Digital y Control de Daños</p>
@@ -22,36 +25,53 @@
     <main class="max-w-xl mx-auto px-4 mt-6">
         <form id="form-recepcion" class="space-y-6">
             
+            <!-- SECCIÓN 1: DATOS DEL CLIENTE -->
             <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
-                <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-car mr-2 text-green-400"></i>Datos del Vehículo</h2>
+                <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-user mr-2 text-green-400"></i>Datos del Cliente</h2>
                 
                 <div>
-                    <label class="block text-xs font-medium text-slate-400 mb-1">Matrícula</label>
-                    <input type="text" id="matricula" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500 uppercase placeholder-slate-500" placeholder="1234ABC">
+                    <label class="block text-xs font-medium text-slate-400 mb-1">Nombre y Apellidos</label>
+                    <input type="text" id="nombre_cliente" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500 placeholder-slate-500" placeholder="Ej: Juan Pérez Gómez">
                 </div>
 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Marca / Modelo</label>
-                        <input type="text" id="modelo" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500 placeholder-slate-500" placeholder="Ej: Golf GTI">
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Teléfono de Contacto</label>
+                        <input type="tel" id="telefono" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500 placeholder-slate-500" placeholder="600123456">
                     </div>
                     <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Kilómetros</label>
-                        <input type="number" id="kilometros" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500 placeholder-slate-500" placeholder="120000">
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Email (Obligatorio LOPD)</label>
+                        <input type="email" id="email" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500 placeholder-slate-500" placeholder="cliente@email.com">
                     </div>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-medium text-slate-400 mb-1">Email del Cliente (Obligatorio para LOPD)</label>
-                    <input type="email" id="email" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500 placeholder-slate-500" placeholder="cliente@email.com">
                 </div>
             </div>
 
+            <!-- SECCIÓN 2: DATOS DEL VEHÍCULO -->
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
+                <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-car mr-2 text-green-400"></i>Datos del Vehículo</h2>
+                
+                <div class="grid grid-cols-3 gap-3">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Matrícula</label>
+                        <input type="text" id="matricula" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-3 text-white focus:outline-none focus:border-green-500 uppercase placeholder-slate-500" placeholder="1234ABC">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Marca / Modelo</label>
+                        <input type="text" id="modelo" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-3 text-white focus:outline-none focus:border-green-500 placeholder-slate-500" placeholder="Ej: Golf GTI">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Kilómetros</label>
+                        <input type="number" id="kilometros" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-3 text-white focus:outline-none focus:border-green-500 placeholder-slate-500" placeholder="120000">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 3: TIPOS DE LAVADO -->
             <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
                 <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-list-check mr-2 text-green-400"></i>Servicio Solicitado</h2>
-                <p class="text-xs text-slate-500 -mt-2">Selecciona el tipo de tratamiento para el vehículo:</p>
                 
                 <div class="space-y-3">
+                    <!-- Lavado Básico -->
                     <div class="relative">
                         <input type="radio" name="servicio" id="lavado-basico" value="Lavado Básico" checked class="btn-check hidden">
                         <label for="lavado-basico" class="flex items-center justify-between p-4 bg-slate-800 border border-slate-700 rounded-xl cursor-pointer transition-all hover:border-slate-500">
@@ -63,6 +83,7 @@
                         </label>
                     </div>
 
+                    <!-- Lavado Plus -->
                     <div class="relative">
                         <input type="radio" name="servicio" id="lavado-plus" value="Lavado Plus" class="btn-check hidden">
                         <label for="lavado-plus" class="flex items-center justify-between p-4 bg-slate-800 border border-slate-700 rounded-xl cursor-pointer transition-all hover:border-slate-500">
@@ -74,6 +95,7 @@
                         </label>
                     </div>
 
+                    <!-- Lavado Premium -->
                     <div class="relative">
                         <input type="radio" name="servicio" id="lavado-premium" value="Lavado Premium" class="btn-check hidden">
                         <label for="lavado-premium" class="flex items-center justify-between p-4 bg-slate-800 border border-slate-700 rounded-xl cursor-pointer transition-all hover:border-slate-500">
@@ -92,9 +114,9 @@
                 </div>
             </div>
 
+            <!-- SECCIÓN 4: CONTROL VISUAL (FOTOS) -->
             <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
                 <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-camera mr-2 text-green-400"></i>Evidencia Fotográfica de Estado</h2>
-                <p class="text-xs text-slate-500 -mt-2">Captura fotos del perímetro para certificar que no se causaron daños en el centro:</p>
                 
                 <div class="grid grid-cols-2 gap-3">
                     <div class="flex flex-col items-center justify-center p-4 bg-slate-800 border border-dashed border-slate-700 rounded-xl relative hover:border-green-500 transition-colors">
@@ -120,6 +142,7 @@
                 </div>
             </div>
 
+            <!-- SECCIÓN 5: FIRMA DIGITAL Y CLAÚSULA LOPD -->
             <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
                 <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-signature mr-2 text-green-400"></i>Cláusula Legal y Firma</h2>
                 
@@ -136,14 +159,15 @@
                 </button>
             </div>
 
+            <!-- BOTÓN DE ENVÍO -->
             <button type="submit" id="btn-enviar" class="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-green-900/30 hover:brightness-110 transition-all flex items-center justify-center gap-2 text-base">
                 <i class="fa-solid fa-paper-plane"></i> Procesar Recepción Pro
             </button>
         </form>
     </main>
 
+    <!-- LOGICA SCRIPT -->
     <script>
-        // Manejo del lienzo para la firma táctil
         const canvas = document.getElementById('canvas-firma');
         const ctx = canvas.getContext('2d');
         let trazando = false;
@@ -194,7 +218,6 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         });
 
-        // Cambio de estilo visual al cargar fotos
         document.querySelectorAll('.camera-input').forEach(input => {
             input.addEventListener('change', function() {
                 if(this.files && this.files[0]) {
@@ -207,34 +230,29 @@
             });
         });
 
-        // Envío de Datos al backend de Vercel
         document.getElementById('form-recepcion').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const emailCliente = document.getElementById('email').value.trim();
-            if (!emailCliente) {
-                alert("Por favor, introduce el email del cliente para poder cumplir con la LOPD.");
-                return;
-            }
-
             const btn = document.getElementById('btn-enviar');
             btn.disabled = true;
             btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> Guardando datos...';
 
             const payload = {
+                nombre_cliente: document.getElementById('nombre_cliente').value,
+                telefono: document.getElementById('telefono').value,
+                email: document.getElementById('email').value.trim(),
                 matricula: document.getElementById('matricula').value.toUpperCase(),
                 modelo: document.getElementById('modelo').value,
                 kilometros: document.getElementById('kilometros').value,
-                email: emailCliente,
                 servicio: document.querySelector('input[name="servicio"]:checked').value,
                 observaciones: document.getElementById('observaciones').value,
                 firma: canvas.toDataURL()
             };
 
             try {
-                // Aquí conectarás la URL de tu backend en Vercel cuando la despliegues
+                // Conexión futura con Vercel
                 console.log("Datos listos para enviar:", payload);
-                alert("¡Recepción guardada! Documentación enviada por correo.");
+                alert("¡Recepción guardada correctamente!");
             } catch (err) {
                 alert("Error al procesar la solicitud.");
             } finally {

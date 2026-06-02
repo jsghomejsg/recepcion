@@ -40,9 +40,15 @@
                         <input type="tel" id="telefono" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500 placeholder-slate-500" placeholder="600123456">
                     </div>
                     <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Email (Obligatorio LOPD)</label>
-                        <input type="email" id="email" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500 placeholder-slate-500" placeholder="cliente@email.com">
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Email</label>
+                        <input type="email" id="email" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500 disabled:opacity-40 disabled:bg-slate-950 placeholder-slate-500" placeholder="cliente@email.com">
                     </div>
+                </div>
+
+                <!-- CASILLA DE NO TIENE EMAIL -->
+                <div class="flex items-center gap-2 pt-1">
+                    <input type="checkbox" id="no_email" class="w-4 h-4 rounded border-slate-700 bg-slate-800 text-green-500 focus:ring-green-500 focus:ring-offset-slate-900">
+                    <label for="no_email" class="text-xs font-medium text-slate-400 cursor-pointer select-none">El cliente no tiene correo electrónico</label>
                 </div>
             </div>
 
@@ -218,6 +224,23 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         });
 
+        // LÓGICA DE ACTIVAR/DESACTIVAR EMAIL CON EL CHECKBOX
+        const inputEmail = document.getElementById('email');
+        const checkboxNoEmail = document.getElementById('no_email');
+
+        checkboxNoEmail.addEventListener('change', function() {
+            if (this.checked) {
+                inputEmail.value = "";
+                inputEmail.disabled = true;
+                inputEmail.required = false;
+                inputEmail.placeholder = "No se enviará correo";
+            } else {
+                inputEmail.disabled = false;
+                inputEmail.required = true;
+                inputEmail.placeholder = "cliente@email.com";
+            }
+        });
+
         document.querySelectorAll('.camera-input').forEach(input => {
             input.addEventListener('change', function() {
                 if(this.files && this.files[0]) {
@@ -237,10 +260,16 @@
             btn.disabled = true;
             btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> Guardando datos...';
 
+            // Si está marcado el checkbox, ponemos un correo comodín para el backend
+            let correoFinal = inputEmail.value.trim();
+            if (checkboxNoEmail.checked) {
+                correoFinal = "notiene@email.com";
+            }
+
             const payload = {
                 nombre_cliente: document.getElementById('nombre_cliente').value,
                 telefono: document.getElementById('telefono').value,
-                email: document.getElementById('email').value.trim(),
+                email: correoFinal,
                 matricula: document.getElementById('matricula').value.toUpperCase(),
                 modelo: document.getElementById('modelo').value,
                 kilometros: document.getElementById('kilometros').value,
@@ -250,7 +279,6 @@
             };
 
             try {
-                // Conexión futura con Vercel
                 console.log("Datos listos para enviar:", payload);
                 alert("¡Recepción guardada correctamente!");
             } catch (err) {

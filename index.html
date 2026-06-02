@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Recepción Detailing Pro</title>
-    <!-- Tailwind CSS para diseño rápido y limpio -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- FontAwesome para los iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body { -webkit-tap-highlight-color: transparent; background-color: #0f172a; }
@@ -16,7 +14,6 @@
 </head>
 <body class="text-slate-200 min-h-screen pb-10">
 
-    <!-- CABECERA -->
     <header class="bg-slate-900 border-b border-slate-800 p-4 text-center shadow-lg">
         <h1 class="text-xl font-bold tracking-wider text-green-400"><i class="fa-solid fa-wand-magic-sparkles mr-2"></i>DETAILING PRO</h1>
         <p class="text-xs text-slate-400 mt-1">Recepción Digital y Control de Daños</p>
@@ -25,7 +22,6 @@
     <main class="max-w-xl mx-auto px-4 mt-6">
         <form id="form-recepcion" class="space-y-6">
             
-            <!-- SECCIÓN 1: DATOS DEL CLIENTE -->
             <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
                 <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-user mr-2 text-green-400"></i>Datos del Cliente</h2>
                 
@@ -45,14 +41,12 @@
                     </div>
                 </div>
 
-                <!-- CASILLA DE NO TIENE EMAIL -->
                 <div class="flex items-center gap-2 pt-1">
                     <input type="checkbox" id="no_email" class="w-4 h-4 rounded border-slate-700 bg-slate-800 text-green-500 focus:ring-green-500 focus:ring-offset-slate-900">
                     <label for="no_email" class="text-xs font-medium text-slate-400 cursor-pointer select-none">El cliente no tiene correo electrónico</label>
                 </div>
             </div>
 
-            <!-- SECCIÓN 2: DATOS DEL VEHÍCULO -->
             <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
                 <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-car mr-2 text-green-400"></i>Datos del Vehículo</h2>
                 
@@ -72,12 +66,10 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN 3: TIPOS DE LAVADO -->
             <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
                 <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-list-check mr-2 text-green-400"></i>Servicio Solicitado</h2>
                 
                 <div class="space-y-3">
-                    <!-- Lavado Básico -->
                     <div class="relative">
                         <input type="radio" name="servicio" id="lavado-basico" value="Lavado Básico" checked class="btn-check hidden">
                         <label for="lavado-basico" class="flex items-center justify-between p-4 bg-slate-800 border border-slate-700 rounded-xl cursor-pointer transition-all hover:border-slate-500">
@@ -89,7 +81,6 @@
                         </label>
                     </div>
 
-                    <!-- Lavado Plus -->
                     <div class="relative">
                         <input type="radio" name="servicio" id="lavado-plus" value="Lavado Plus" class="btn-check hidden">
                         <label for="lavado-plus" class="flex items-center justify-between p-4 bg-slate-800 border border-slate-700 rounded-xl cursor-pointer transition-all hover:border-slate-500">
@@ -101,7 +92,6 @@
                         </label>
                     </div>
 
-                    <!-- Lavado Premium -->
                     <div class="relative">
                         <input type="radio" name="servicio" id="lavado-premium" value="Lavado Premium" class="btn-check hidden">
                         <label for="lavado-premium" class="flex items-center justify-between p-4 bg-slate-800 border border-slate-700 rounded-xl cursor-pointer transition-all hover:border-slate-500">
@@ -120,7 +110,6 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN 4: CONTROL VISUAL (FOTOS) -->
             <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
                 <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-camera mr-2 text-green-400"></i>Evidencia Fotográfica de Estado</h2>
                 
@@ -148,7 +137,6 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN 5: FIRMA DIGITAL Y CLAÚSULA LOPD -->
             <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
                 <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-signature mr-2 text-green-400"></i>Cláusula Legal y Firma</h2>
                 
@@ -165,14 +153,12 @@
                 </button>
             </div>
 
-            <!-- BOTÓN DE ENVÍO -->
             <button type="submit" id="btn-enviar" class="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-green-900/30 hover:brightness-110 transition-all flex items-center justify-center gap-2 text-base">
                 <i class="fa-solid fa-paper-plane"></i> Procesar Recepción Pro
             </button>
         </form>
     </main>
 
-    <!-- LOGICA SCRIPT -->
     <script>
         const canvas = document.getElementById('canvas-firma');
         const ctx = canvas.getContext('2d');
@@ -224,7 +210,6 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         });
 
-        // LÓGICA DE ACTIVAR/DESACTIVAR EMAIL CON EL CHECKBOX
         const inputEmail = document.getElementById('email');
         const checkboxNoEmail = document.getElementById('no_email');
 
@@ -260,7 +245,6 @@
             btn.disabled = true;
             btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> Guardando datos...';
 
-            // Si está marcado el checkbox, ponemos un correo comodín para el backend
             let correoFinal = inputEmail.value.trim();
             if (checkboxNoEmail.checked) {
                 correoFinal = "notiene@email.com";
@@ -279,10 +263,25 @@
             };
 
             try {
-                console.log("Datos listos para enviar:", payload);
-                alert("¡Recepción guardada correctamente!");
+                // Conexión directa con tu servidor en Vercel
+                const respuesta = await fetch('https://recepcion-amber.vercel.app/api/enviar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (respuesta.ok) {
+                    alert("¡Recepción guardada! Documentación enviada por correo.");
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    document.getElementById('form-recepcion').reset();
+                    inputEmail.disabled = false;
+                    inputEmail.required = true;
+                    inputEmail.placeholder = "cliente@email.com";
+                } else {
+                    alert("Error del servidor al procesar el correo.");
+                }
             } catch (err) {
-                alert("Error al procesar la solicitud.");
+                alert("Error de conexión con el servidor. Inténtalo de nuevo.");
             } finally {
                 btn.disabled = false;
                 btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Procesar Recepción Pro';

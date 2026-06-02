@@ -1,7 +1,6 @@
 const nodemailer = require('nodemailer');
 
 export default async function handler(req, res) {
-    // Permisos de comunicación (CORS)
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
@@ -18,7 +17,6 @@ export default async function handler(req, res) {
     try {
         const { nombre_cliente, telefono, email, matricula, modelo, kilometros, servicio, observaciones, firma } = req.body;
 
-        // Configuramos el motor con tu Gmail
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -27,10 +25,14 @@ export default async function handler(req, res) {
             }
         });
 
-        // Estructura del correo electrónico
+        const destinatarios = [process.env.GMAIL_USER];
+        if (email && email !== 'notiene@email.com') {
+            destinatarios.push(email);
+        }
+
         const mailOptions = {
             from: process.env.GMAIL_USER,
-            to: [process.env.GMAIL_USER, email].join(','), 
+            to: destinatarios.join(','), 
             subject: `Recepción Detailing - ${servicio} - ${matricula}`,
             html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; color: #333;">
@@ -40,22 +42,16 @@ export default async function handler(req, res) {
                         <p><strong>Nombre:</strong> ${nombre_cliente}</p>
                         <p><strong>Teléfono:</strong> ${telefono}</p>
                         <p><strong>Email:</strong> ${email === 'notiene@email.com' ? 'El cliente no tiene correo' : email}</p>
-                        
                         <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
-                        
                         <h3>Datos del Vehículo</h3>
                         <p><strong>Matrícula:</strong> ${matricula}</p>
                         <p><strong>Marca / Modelo:</strong> ${modelo}</p>
                         <p><strong>Kilómetros:</strong> ${kilometros}</p>
-                        
                         <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
-                        
                         <h3>Servicio Contratado</h3>
                         <p><strong>Tipo de Lavado:</strong> <span style="background: #10b981; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold;">${servicio}</span></p>
                         <p><strong>Observaciones previas:</strong> ${observaciones || 'Sin observaciones'}</p>
-                        
                         <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
-                        
                         <h3>Firma de Conformidad LOPD</h3>
                         <div style="border: 1px solid #ccc; background: #fff; padding: 10px; display: inline-block; border-radius: 4px;">
                             <img src="${firma}" alt="Firma" style="max-width: 100%; height: auto;"/>
@@ -65,7 +61,6 @@ export default async function handler(req, res) {
             `
         };
 
-        // Forzamos la espera del envío real
         await new Promise((resolve, reject) => {
             transporter.sendMail(mailOptions, (err, info) => {
                 if (err) {

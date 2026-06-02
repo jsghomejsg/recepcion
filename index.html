@@ -251,8 +251,8 @@
             };
 
             try {
-                // LLAMADA A TU ENLACE REAL DE VERCEL
-                const respuesta = await fetch('https://recepcion-jsg-digital-projects.vercel.app/api/enviar', {
+                // USA DIRECCIÓN RELATIVA APUNTANDO AL SERVIDOR REAL
+                const respuesta = await fetch('/api/enviar', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)

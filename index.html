@@ -252,7 +252,7 @@
 
             try {
                 // USA DIRECCIÓN RELATIVA APUNTANDO AL SERVIDOR REAL
-                const respuesta = await fetch('/api/enviar', {
+                const respuesta = await fetch('/api/send', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)

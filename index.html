@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Recepción Detailing Pro</title>
-    <!-- Tailwind CSS para diseño rápido y limpio -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- FontAwesome para los iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body { -webkit-tap-highlight-color: transparent; background-color: #0f172a; }
@@ -16,16 +14,14 @@
 </head>
 <body class="text-slate-200 min-h-screen pb-10">
 
-    <!-- CABECERA -->
     <header class="bg-slate-900 border-b border-slate-800 p-4 text-center shadow-lg">
-        <h1 class="text-xl font-bold tracking-wider text-green-400"><i class="fa-solid fa-wand-magic-sparkles mr-2"></i>COUNTRYSIDE DETAILING PRO</h1>
+        <h1 class="text-xl font-bold tracking-wider text-green-400"><i class="fa-solid fa-wand-magic-sparkles mr-2"></i>DETAILING PRO</h1>
         <p class="text-xs text-slate-400 mt-1">Recepción Digital y Control de Daños</p>
     </header>
 
     <main class="max-w-xl mx-auto px-4 mt-6">
         <form id="form-recepcion" class="space-y-6">
             
-            <!-- SECCIÓN 1: DATOS DEL CLIENTE -->
             <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
                 <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-user mr-2 text-green-400"></i>Datos del Cliente</h2>
                 
@@ -45,14 +41,12 @@
                     </div>
                 </div>
 
-                <!-- CASILLA DE NO TIENE EMAIL -->
                 <div class="flex items-center gap-2 pt-1">
                     <input type="checkbox" id="no_email" class="w-4 h-4 rounded border-slate-700 bg-slate-800 text-green-500 focus:ring-green-500 focus:ring-offset-slate-900">
                     <label for="no_email" class="text-xs font-medium text-slate-400 cursor-pointer select-none">El cliente no tiene correo electrónico</label>
                 </div>
             </div>
 
-            <!-- SECCIÓN 2: DATOS DEL VEHÍCULO -->
             <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
                 <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-car mr-2 text-green-400"></i>Datos del Vehículo</h2>
                 
@@ -72,7 +66,6 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN 3: TIPOS DE LAVADO -->
             <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
                 <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-list-check mr-2 text-green-400"></i>Servicio Solicitado</h2>
                 
@@ -117,7 +110,6 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN 4: CONTROL VISUAL (FOTOS) -->
             <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
                 <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-camera mr-2 text-green-400"></i>Evidencia Fotográfica de Estado</h2>
                 
@@ -145,7 +137,6 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN 5: FIRMA DIGITAL Y CLAÚSULA LOPD -->
             <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
                 <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-signature mr-2 text-green-400"></i>Cláusula Legal y Firma</h2>
                 
@@ -162,14 +153,12 @@
                 </button>
             </div>
 
-            <!-- BOTÓN DE ENVÍO -->
             <button type="submit" id="btn-enviar" class="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-green-900/30 hover:brightness-110 transition-all flex items-center justify-center gap-2 text-base">
                 <i class="fa-solid fa-paper-plane"></i> Procesar Recepción Pro
             </button>
         </form>
     </main>
 
-    <!-- LOGICA SCRIPT -->
     <script>
         const canvas = document.getElementById('canvas-firma');
         const ctx = canvas.getContext('2d');
@@ -291,7 +280,6 @@
                     inputEmail.placeholder = "cliente@email.com";
                     checkboxNoEmail.checked = false;
                     
-                    // Resetear estilo visual de los botones de fotos
                     document.querySelectorAll('.camera-input').forEach(input => {
                         const contenedor = input.parentElement;
                         contenedor.classList.remove('bg-green-950', 'border-green-500');

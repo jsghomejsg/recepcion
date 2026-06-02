@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 
 export default async function handler(req, res) {
-    // Permisos para que tu web de GitHub Pages pueda comunicarse con Vercel
+    // Permisos de comunicación (CORS)
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     try {
         const { nombre_cliente, telefono, email, matricula, modelo, kilometros, servicio, observaciones, firma } = req.body;
 
-        // Configuramos el motor de envío con tu cuenta de Gmail
+        // Configuramos el motor con tu Gmail
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -27,7 +27,7 @@ export default async function handler(req, res) {
             }
         });
 
-        // Estructura del correo electrónico que te llegará a ti y al cliente
+        // Estructura del correo electrónico
         const mailOptions = {
             from: process.env.GMAIL_USER,
             to: [process.env.GMAIL_USER, email].join(','), 
@@ -57,7 +57,6 @@ export default async function handler(req, res) {
                         <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
                         
                         <h3>Firma de Conformidad LOPD</h3>
-                        <p style="font-size: 11px; color: #666;">El cliente autoriza el servicio de limpieza y confirma el estado de roces reflejado en las observaciones.</p>
                         <div style="border: 1px solid #ccc; background: #fff; padding: 10px; display: inline-block; border-radius: 4px;">
                             <img src="${firma}" alt="Firma" style="max-width: 100%; height: auto;"/>
                         </div>
@@ -66,11 +65,22 @@ export default async function handler(req, res) {
             `
         };
 
-        await transporter.sendMail(mailOptions);
+        // Forzamos la espera del envío real
+        await new Promise((resolve, reject) => {
+            transporter.sendMail(mailOptions, (err, info) => {
+                if (err) {
+                    console.error(err);
+                    reject(err);
+                } else {
+                    resolve(info);
+                }
+            });
+        });
+
         return res.status(200).json({ success: true });
 
     } catch (error) {
-        console.error('Error:', error);
-        return res.status(500).json({ error: error.message });
+        console.error('Error en el servidor:', error);
+        return res.status(500).json({ success: false, error: error.message });
     }
 }

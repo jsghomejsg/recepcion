@@ -9,15 +9,14 @@ export default async function handler(req, res) {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'tu-correo@gmail.com', // 👈 ASEGÚRATE DE QUE AQUÍ ESTÁ TU CORREO EXACTO DE GMAIL
-        pass: process.env.GMAIL_PASS, // Esto lee directamente las 16 letras de Vercel
+        user: 'noreply.recepcionpro@gmail.com',
+        pass: 'iuulukadxfsldvcd', // 👈 Ponemos la clave directa para que no dependa de Vercel
       },
     });
 
-    // Configuración del correo que se envía
     const mailOptions = {
-      from: 'tu-correo@gmail.com', // 👈 AQUÍ TAMBIÉN TU CORREO
-      to: 'tu-correo@gmail.com',   // A quién le llega (puedes poner el mismo)
+      from: 'noreply.recepcionpro@gmail.com',
+      to: 'noreply.recepcionpro@gmail.com',
       subject: 'Nueva Recepción Pro Registrada',
       text: 'Se ha procesado una nueva recepción correctamente en el sistema.',
     };

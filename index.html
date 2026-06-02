@@ -24,12 +24,10 @@
             
             <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
                 <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-user mr-2 text-green-400"></i>Datos del Cliente</h2>
-                
                 <div>
                     <label class="block text-xs font-medium text-slate-400 mb-1">Nombre y Apellidos</label>
                     <input type="text" id="nombre_cliente" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500 placeholder-slate-500" placeholder="Ej: Juan Pérez Gómez">
                 </div>
-
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-medium text-slate-400 mb-1">Teléfono de Contacto</label>
@@ -40,7 +38,6 @@
                         <input type="email" id="email" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500 disabled:opacity-40 disabled:bg-slate-950 placeholder-slate-500" placeholder="cliente@email.com">
                     </div>
                 </div>
-
                 <div class="flex items-center gap-2 pt-1">
                     <input type="checkbox" id="no_email" class="w-4 h-4 rounded border-slate-700 bg-slate-800 text-green-500 focus:ring-green-500 focus:ring-offset-slate-900">
                     <label for="no_email" class="text-xs font-medium text-slate-400 cursor-pointer select-none">El cliente no tiene correo electrónico</label>
@@ -49,7 +46,6 @@
 
             <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
                 <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-car mr-2 text-green-400"></i>Datos del Vehículo</h2>
-                
                 <div class="grid grid-cols-3 gap-3">
                     <div>
                         <label class="block text-xs font-medium text-slate-400 mb-1">Matrícula</label>
@@ -68,7 +64,6 @@
 
             <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
                 <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-list-check mr-2 text-green-400"></i>Servicio Solicitado</h2>
-                
                 <div class="space-y-3">
                     <div class="relative">
                         <input type="radio" name="servicio" id="lavado-basico" value="Lavado Básico" checked class="btn-check hidden">
@@ -80,7 +75,6 @@
                             <i class="fa-solid fa-circle-check text-slate-600 checked-icon"></i>
                         </label>
                     </div>
-
                     <div class="relative">
                         <input type="radio" name="servicio" id="lavado-plus" value="Lavado Plus" class="btn-check hidden">
                         <label for="lavado-plus" class="flex items-center justify-between p-4 bg-slate-800 border border-slate-700 rounded-xl cursor-pointer transition-all hover:border-slate-500">
@@ -91,7 +85,6 @@
                             <i class="fa-solid fa-circle-check text-slate-600 checked-icon"></i>
                         </label>
                     </div>
-
                     <div class="relative">
                         <input type="radio" name="servicio" id="lavado-premium" value="Lavado Premium" class="btn-check hidden">
                         <label for="lavado-premium" class="flex items-center justify-between p-4 bg-slate-800 border border-slate-700 rounded-xl cursor-pointer transition-all hover:border-slate-500">
@@ -103,7 +96,6 @@
                         </label>
                     </div>
                 </div>
-
                 <div>
                     <label class="block text-xs font-medium text-slate-400 mb-1">Notas u Observaciones previas</label>
                     <textarea id="observaciones" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500 placeholder-slate-500 text-sm" placeholder="Ej: Arañazo leve en aleta trasera derecha..."></textarea>
@@ -112,7 +104,6 @@
 
             <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
                 <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-camera mr-2 text-green-400"></i>Evidencia Fotográfica de Estado</h2>
-                
                 <div class="grid grid-cols-2 gap-3">
                     <div class="flex flex-col items-center justify-center p-4 bg-slate-800 border border-dashed border-slate-700 rounded-xl relative hover:border-green-500 transition-colors">
                         <input type="file" accept="image/*" capture="environment" class="absolute inset-0 opacity-0 cursor-pointer camera-input">
@@ -139,15 +130,12 @@
 
             <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
                 <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-signature mr-2 text-green-400"></i>Cláusula Legal y Firma</h2>
-                
                 <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 h-24 overflow-y-auto text-[10px] text-slate-400 leading-normal">
                     Con la firma del presente documento, el cliente autoriza expresamente al centro de detallado a manipular y conducir el vehículo para los servicios de limpieza contratados. El centro no se hace responsable de objetos de valor dejados en el interior no declarados previamente. De acuerdo con la LOPD y RGPD, sus datos serán tratados con la única finalidad de gestionar el servicio técnico y el envío de la orden digitalizada a su dirección de correo electrónico.
                 </div>
-
                 <div class="border border-slate-700 rounded-xl overflow-hidden bg-white">
                     <canvas id="canvas-firma" class="w-full h-36"></canvas>
                 </div>
-                
                 <button type="button" id="btn-borrar" class="text-xs text-red-400 font-semibold flex items-center gap-1 ml-auto hover:text-red-300">
                     <i class="fa-solid fa-trash-can"></i> Borrar Firma
                 </button>
@@ -263,7 +251,8 @@
             };
 
             try {
-                const respuesta = await fetch('https://recepcion-amber.vercel.app/api/enviar', {
+                // LLAMADA A TU ENLACE REAL DE VERCEL
+                const respuesta = await fetch('https://recepcion-jsg-digital-projects.vercel.app/api/enviar', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)

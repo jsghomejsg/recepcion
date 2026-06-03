@@ -6,8 +6,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Aquí recibimos todos los datos reales que rellenas en la pantalla
-    const { nombre, telefono, matricula, marca, modelo, observaciones, firma, fotos } = req.body;
+    // Recogemos todos los datos, incluido el email del cliente
+    const { nombre, telefono, email, matricula, marca, modelo, observaciones, firma, fotos } = req.body;
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -17,7 +17,7 @@ export default async function handler(req, res) {
       },
     });
 
-    // Preparamos los archivos adjuntos (fotos y firma) si existen en el formulario
+    // Preparar archivos adjuntos (firma y fotos)
     const attachments = [];
     
     if (firma) {
@@ -41,16 +41,22 @@ export default async function handler(req, res) {
       });
     }
 
-    // Diseñamos el contenido del correo con los datos del coche y del cliente
+    // Ponemos tu correo en "to" (para ti) y el del cliente en "cc" (copia para él)
+    const destinatarios = [process.env.GMAIL_USER];
+    if (email) {
+      destinatarios.push(email);
+    }
+
     const mailOptions = {
       from: process.env.GMAIL_USER,
-      to: process.env.GMAIL_USER,
+      to: destinatarios, // 👈 Se envía a ti y al cliente a la vez
       subject: `Nueva Recepción Pro - Matrícula: ${matricula || 'N/A'}`,
       html: `
         <h2>Nueva Recepción de Vehículo Registrada</h2>
         <hr />
         <p><strong>Cliente:</strong> ${nombre || 'No especificado'}</p>
         <p><strong>Teléfono:</strong> ${telefono || 'No especificado'}</p>
+        <p><strong>Correo del Cliente:</strong> ${email || 'No especificado'}</p>
         <p><strong>Vehículo:</strong> ${marca || ''} ${modelo || ''}</p>
         <p><strong>Matrícula:</strong> ${matricula || 'No especificada'}</p>
         <p><strong>Observaciones / Estado:</strong> ${observaciones || 'Sin observaciones'}</p>

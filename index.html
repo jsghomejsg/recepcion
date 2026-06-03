@@ -2,288 +2,257 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Recepción Detailing Pro</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RECEPCIÓN DETAILING PRO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
-        body { -webkit-tap-highlight-color: transparent; background-color: #0f172a; }
-        .btn-check:checked + label { background-color: #22c55e !important; color: white !important; border-color: #22c55e !important; }
         canvas { touch-action: none; }
+        input[type="file"], .opcion-check { display: none; }
+        .opcion-tarjeta:has(input:checked) {
+            border-color: #3b82f6;
+            background-color: #1e3a8a;
+            color: #ffffff;
+        }
     </style>
 </head>
-<body class="text-slate-200 min-h-screen pb-10">
+<body class="bg-gray-950 text-gray-200 font-sans antialiased">
 
-    <header class="bg-slate-900 border-b border-slate-800 p-4 text-center shadow-lg">
-        <h1 class="text-xl font-bold tracking-wider text-green-400"><i class="fa-solid fa-wand-magic-sparkles mr-2"></i>DETAILING PRO</h1>
-        <p class="text-xs text-slate-400 mt-1">Recepción Digital y Control de Daños</p>
-    </header>
-
-    <main class="max-w-xl mx-auto px-4 mt-6">
-        <form id="form-recepcion" class="space-y-6">
-            
-            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
-                <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-user mr-2 text-green-400"></i>Datos del Cliente</h2>
-                <div>
-                    <label class="block text-xs font-medium text-slate-400 mb-1">Nombre y Apellidos</label>
-                    <input type="text" id="nombre_cliente" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500 placeholder-slate-500" placeholder="Ej: Juan Pérez Gómez">
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Teléfono de Contacto</label>
-                        <input type="tel" id="telefono" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500 placeholder-slate-500" placeholder="600123456">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Email</label>
-                        <input type="email" id="email" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500 disabled:opacity-40 disabled:bg-slate-950 placeholder-slate-500" placeholder="cliente@email.com">
-                    </div>
-                </div>
-                <div class="flex items-center gap-2 pt-1">
-                    <input type="checkbox" id="no_email" class="w-4 h-4 rounded border-slate-700 bg-slate-800 text-green-500 focus:ring-green-500 focus:ring-offset-slate-900">
-                    <label for="no_email" class="text-xs font-medium text-slate-400 cursor-pointer select-none">El cliente no tiene correo electrónico</label>
-                </div>
+    <div class="max-w-md mx-auto p-4 min-h-screen flex flex-col justify-between">
+        
+        <header class="p-3 text-center flex flex-col items-center">
+            <h1 class="text-2xl font-extrabold text-white tracking-tight uppercase">RECEPCIÓN DETAILING PRO</h1>
+            <div class="inline-flex items-center bg-blue-950 text-blue-400 text-xs font-bold px-3 py-1 rounded-full mt-2 uppercase tracking-wider border border-blue-900">
+                Centro de Estética Automotriz
             </div>
-
-            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
-                <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-car mr-2 text-green-400"></i>Datos del Vehículo</h2>
-                <div class="grid grid-cols-3 gap-3">
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Matrícula</label>
-                        <input type="text" id="matricula" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-3 text-white focus:outline-none focus:border-green-500 uppercase placeholder-slate-500" placeholder="1234ABC">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Marca / Modelo</label>
-                        <input type="text" id="modelo" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-3 text-white focus:outline-none focus:border-green-500 placeholder-slate-500" placeholder="Ej: Golf GTI">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Kilómetros</label>
-                        <input type="number" id="kilometros" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-3 text-white focus:outline-none focus:border-green-500 placeholder-slate-500" placeholder="120000">
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
-                <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-list-check mr-2 text-green-400"></i>Servicio Solicitado</h2>
-                <div class="space-y-3">
-                    <div class="relative">
-                        <input type="radio" name="servicio" id="lavado-basico" value="Lavado Básico" checked class="btn-check hidden">
-                        <label for="lavado-basico" class="flex items-center justify-between p-4 bg-slate-800 border border-slate-700 rounded-xl cursor-pointer transition-all hover:border-slate-500">
-                            <div>
-                                <span class="block font-bold text-sm">Lavado Básico</span>
-                                <span class="block text-xs text-slate-400 mt-0.5">Exterior a mano, secado toalla y aspirado rápido.</span>
-                            </div>
-                            <i class="fa-solid fa-circle-check text-slate-600 checked-icon"></i>
-                        </label>
-                    </div>
-                    <div class="relative">
-                        <input type="radio" name="servicio" id="lavado-plus" value="Lavado Plus" class="btn-check hidden">
-                        <label for="lavado-plus" class="flex items-center justify-between p-4 bg-slate-800 border border-slate-700 rounded-xl cursor-pointer transition-all hover:border-slate-500">
-                            <div>
-                                <span class="block font-bold text-sm">Lavado Plus</span>
-                                <span class="block text-xs text-slate-400 mt-0.5">Básico + Desinfección interior + Limpieza de llantas a fondo.</span>
-                            </div>
-                            <i class="fa-solid fa-circle-check text-slate-600 checked-icon"></i>
-                        </label>
-                    </div>
-                    <div class="relative">
-                        <input type="radio" name="servicio" id="lavado-premium" value="Lavado Premium" class="btn-check hidden">
-                        <label for="lavado-premium" class="flex items-center justify-between p-4 bg-slate-800 border border-slate-700 rounded-xl cursor-pointer transition-all hover:border-slate-500">
-                            <div>
-                                <span class="block font-bold text-sm">Tratamiento Premium / Detailing</span>
-                                <span class="block text-xs text-slate-400 mt-0.5">Plus + Encerado de alto brillo + Detallado de plásticos internos.</span>
-                            </div>
-                            <i class="fa-solid fa-circle-check text-slate-600 checked-icon"></i>
-                        </label>
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-xs font-medium text-slate-400 mb-1">Notas u Observaciones previas</label>
-                    <textarea id="observaciones" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500 placeholder-slate-500 text-sm" placeholder="Ej: Arañazo leve en aleta trasera derecha..."></textarea>
-                </div>
-            </div>
-
-            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
-                <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-camera mr-2 text-green-400"></i>Evidencia Fotográfica de Estado</h2>
-                <div class="grid grid-cols-2 gap-3">
-                    <div class="flex flex-col items-center justify-center p-4 bg-slate-800 border border-dashed border-slate-700 rounded-xl relative hover:border-green-500 transition-colors">
-                        <input type="file" accept="image/*" capture="environment" class="absolute inset-0 opacity-0 cursor-pointer camera-input">
-                        <i class="fa-solid fa-image text-slate-500 text-lg mb-1"></i>
-                        <span class="text-[11px] text-slate-400 text-center">Foto Frontal</span>
-                    </div>
-                    <div class="flex flex-col items-center justify-center p-4 bg-slate-800 border border-dashed border-slate-700 rounded-xl relative hover:border-green-500 transition-colors">
-                        <input type="file" accept="image/*" capture="environment" class="absolute inset-0 opacity-0 cursor-pointer camera-input">
-                        <i class="fa-solid fa-image text-slate-500 text-lg mb-1"></i>
-                        <span class="text-[11px] text-slate-400 text-center">Foto Trasera</span>
-                    </div>
-                    <div class="flex flex-col items-center justify-center p-4 bg-slate-800 border border-dashed border-slate-700 rounded-xl relative hover:border-green-500 transition-colors">
-                        <input type="file" accept="image/*" capture="environment" class="absolute inset-0 opacity-0 cursor-pointer camera-input">
-                        <i class="fa-solid fa-image text-slate-500 text-lg mb-1"></i>
-                        <span class="text-[11px] text-slate-400 text-center">Lateral Derecho</span>
-                    </div>
-                    <div class="flex flex-col items-center justify-center p-4 bg-slate-800 border border-dashed border-slate-700 rounded-xl relative hover:border-green-500 transition-colors">
-                        <input type="file" accept="image/*" capture="environment" class="absolute inset-0 opacity-0 cursor-pointer camera-input">
-                        <i class="fa-solid fa-image text-slate-500 text-lg mb-1"></i>
-                        <span class="text-[11px] text-slate-400 text-center">Lateral Izquierdo</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md space-y-4">
-                <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-signature mr-2 text-green-400"></i>Cláusula Legal y Firma</h2>
-                <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 h-24 overflow-y-auto text-[10px] text-slate-400 leading-normal">
-                    Con la firma del presente documento, el cliente autoriza expresamente al centro de detallado a manipular y conducir el vehículo para los servicios de limpieza contratados. El centro no se hace responsable de objetos de valor dejados en el interior no declarados previamente. De acuerdo con la LOPD y RGPD, sus datos serán tratados con la única finalidad de gestionar el servicio técnico y el envío de la orden digitalizada a su dirección de correo electrónico.
-                </div>
-                <div class="border border-slate-700 rounded-xl overflow-hidden bg-white">
-                    <canvas id="canvas-firma" class="w-full h-36"></canvas>
-                </div>
-                <button type="button" id="btn-borrar" class="text-xs text-red-400 font-semibold flex items-center gap-1 ml-auto hover:text-red-300">
-                    <i class="fa-solid fa-trash-can"></i> Borrar Firma
-                </button>
-            </div>
-
-            <button type="submit" id="btn-enviar" class="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-green-900/30 hover:brightness-110 transition-all flex items-center justify-center gap-2 text-base">
-                <i class="fa-solid fa-paper-plane"></i> Procesar Recepción Pro
+            <button id="btn_instalar" class="mt-3 flex items-center justify-center bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-300 font-bold py-2 px-4 rounded-xl text-xs transition active:scale-95 shadow-md">
+                <svg class="w-4 h-4 mr-1.5 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                Instalar App en el Móvil
             </button>
-        </form>
-    </main>
+        </header>
+
+        <main class="mt-2 space-y-4 flex-grow">
+            
+            <div class="bg-gray-900 p-5 rounded-2xl shadow-2xl border border-gray-800 space-y-4">
+                <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider">1. Datos del Vehículo y Cliente</h2>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-400 mb-1">Matrícula</label>
+                        <input type="text" id="matricula" placeholder="1234XYZ" class="w-full uppercase p-3 bg-gray-800 text-white border border-gray-700 rounded-xl font-mono text-lg font-bold tracking-wider">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-400 mb-1">Marca y Modelo</label>
+                        <input type="text" id="marca_modelo" placeholder="Golf GTI / BMW X3" class="w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-xl font-bold">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-400 mb-1">Nombre del Cliente</label>
+                    <input type="text" id="nombre" placeholder="Manuel García" class="w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-xl">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-400 mb-1">Teléfono</label>
+                    <input type="tel" id="telefono" placeholder="600123456" class="w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-xl">
+                </div>
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="block text-xs font-medium text-gray-400">Correo Electrónico</label>
+                        <label class="inline-flex items-center text-[10px] text-gray-500">
+                            <input type="checkbox" id="no_email" class="mr-1"> No tiene email
+                        </label>
+                    </div>
+                    <input type="email" id="email" placeholder="email@cliente.com" class="w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-xl transition">
+                </div>
+            </div>
+
+            <div class="bg-gray-900 p-5 rounded-2xl shadow-2xl border border-gray-800 space-y-4">
+                <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider">2. Servicios Contratados</h2>
+                <div class="grid grid-cols-2 gap-2">
+                    <label class="opcion-tarjeta flex items-center justify-center p-2 bg-gray-800 border border-gray-700 rounded-xl text-[11px] font-medium text-gray-300 cursor-pointer h-12 text-center transition">
+                        <input type="checkbox" class="opcion-check" value="Lavado Premium Integral"> Lavado Integral
+                    </label>
+                    <label class="opcion-tarjeta flex items-center justify-center p-2 bg-gray-800 border border-gray-700 rounded-xl text-[11px] font-medium text-gray-300 cursor-pointer h-12 text-center transition">
+                        <input type="checkbox" class="opcion-check" value="Corrección de Pintura / Pulido"> Pulido Detallado
+                    </label>
+                    <label class="opcion-tarjeta flex items-center justify-center p-2 bg-gray-800 border border-gray-700 rounded-xl text-[11px] font-medium text-gray-300 cursor-pointer h-12 text-center transition">
+                        <input type="checkbox" class="opcion-check" value="Tratamiento Cerámico Coated"> Cerámico Coating
+                    </label>
+                    <label class="opcion-tarjeta flex items-center justify-center p-2 bg-gray-800 border border-gray-700 rounded-xl text-[11px] font-medium text-gray-300 cursor-pointer h-12 text-center transition">
+                        <input type="checkbox" class="opcion-check" value="Limpieza de Tapicería"> Tapicería Profunda
+                    </label>
+                    <label class="opcion-tarjeta flex items-center justify-center p-2 bg-gray-800 border border-gray-700 rounded-xl text-[11px] font-medium text-gray-300 cursor-pointer h-12 text-center transition">
+                        <input type="checkbox" class="opcion-check" value="Acondicionamiento Plásticos/Cuero"> Plásticos / Cuero
+                    </label>
+                    <label class="opcion-tarjeta flex items-center justify-center p-2 bg-gray-800 border border-gray-700 rounded-xl text-[11px] font-medium text-gray-300 cursor-pointer h-12 text-center transition">
+                        <input type="checkbox" class="opcion-check" value="Pulido de Faros"> Pulido de Faros
+                    </label>
+                </div>
+                <textarea id="notas_trabajo" rows="2" placeholder="Defectos observados (Arañazos, abolladuras...)" class="w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-xl text-sm"></textarea>
+            </div>
+
+            <div class="bg-gray-900 p-5 rounded-2xl shadow-2xl border border-gray-800 space-y-4">
+                <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider">3. Estado Visual (Fotos Evidencia)</h2>
+                <div class="grid grid-cols-2 gap-3">
+                    <label class="flex flex-col items-center justify-center h-20 bg-gray-800 rounded-xl border border-dashed border-gray-700 cursor-pointer transition" id="lbl_foto1">
+                        <span class="text-[9px] text-gray-400">FRONTAL</span>
+                        <input type="file" id="foto1" accept="image/*" capture="camera" onchange="procesarFoto(this, 'lbl_foto1')">
+                    </label>
+                    <label class="flex flex-col items-center justify-center h-20 bg-gray-800 rounded-xl border border-dashed border-gray-700 cursor-pointer transition" id="lbl_foto2">
+                        <span class="text-[9px] text-gray-400">TRASERA</span>
+                        <input type="file" id="foto2" accept="image/*" capture="camera" onchange="procesarFoto(this, 'lbl_foto2')">
+                    </label>
+                    <label class="flex flex-col items-center justify-center h-20 bg-gray-800 rounded-xl border border-dashed border-gray-700 cursor-pointer transition" id="lbl_foto3">
+                        <span class="text-[9px] text-gray-400">LATERAL IZQ.</span>
+                        <input type="file" id="foto3" accept="image/*" capture="camera" onchange="procesarFoto(this, 'lbl_foto3')">
+                    </label>
+                    <label class="flex flex-col items-center justify-center h-20 bg-gray-800 rounded-xl border border-dashed border-gray-700 cursor-pointer transition" id="lbl_foto4">
+                        <span class="text-[9px] text-gray-400">LATERAL DER.</span>
+                        <input type="file" id="foto4" accept="image/*" capture="camera" onchange="procesarFoto(this, 'lbl_foto4')">
+                    </label>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 p-5 rounded-2xl shadow-2xl border border-gray-800 space-y-4">
+                <div class="flex justify-between items-center mb-1">
+                    <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider">4. Términos Legales y Firma</h2>
+                    <button type="button" id="btn_limpiar" class="text-[10px] bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-300 py-1 px-2.5 rounded-lg font-medium transition">Borrar Firma</button>
+                </div>
+                
+                <div class="bg-gray-950 p-3 rounded-xl border border-gray-850 h-24 overflow-y-auto text-[10px] text-gray-400 space-y-2">
+                    <p class="font-bold text-gray-300 uppercase text-[9px]">Documento de Depósito y Estado de Vehículo - Detailing</p>
+                    <p>De conformidad con el RGPD, los datos recogidos se tratarán exclusivamente para la orden de servicio contratada. El cliente autoriza la manipulación del vehículo dentro del centro para el correcto desarrollo de las fases de acondicionado, lavado y detallado estipuladas.</p>
+                </div>
+
+                <div class="bg-gray-950 rounded-xl border border-gray-800 overflow-hidden">
+                    <canvas id="canvas_firma" class="w-full h-32 bg-gray-950 block" width="350" height="128"></canvas>
+                </div>
+            </div>
+
+        </main>
+
+        <footer class="mt-5 mb-2">
+            <button id="btn_enviar" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl shadow-lg text-lg flex items-center justify-center transition active:scale-95">
+                Finalizar y Guardar Registro
+            </button>
+        </footer>
+
+    </div>
 
     <script>
-        const canvas = document.getElementById('canvas-firma');
+        const fotosAlmacenadas = {};
+        let eventoInstalacion;
+
+        window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); eventoInstalacion = e; });
+        document.getElementById('btn_instalar').addEventListener('click', async () => {
+            if (eventoInstalacion) { eventoInstalacion.prompt(); eventoInstalacion = null; }
+            else { alert('📱 Guarda la App:\n• En Android/PC: Tres puntos -> "Instalar".\n• En iPhone: Compartir -> "Añadir a pantalla de inicio".'); }
+        });
+
+        const canvas = document.getElementById('canvas_firma');
         const ctx = canvas.getContext('2d');
-        let trazando = false;
+        let trazando = false; ctx.strokeStyle = "#3b82f6"; ctx.lineWidth = 3;
+        function obtenerPosicion(e) { const r = canvas.getBoundingClientRect(); const cX = e.touches ? e.touches[0].clientX : e.clientX; const cY = e.touches ? e.touches[0].clientY : e.clientY; return { x: cX - r.left, y: cY - r.top }; }
+        canvas.addEventListener('mousedown', (e) => { trazando = true; ctx.beginPath(); const p = obtenerPosicion(e); ctx.moveTo(p.x, p.y); });
+        canvas.addEventListener('mousemove', (e) => { if(!trazando) return; const p = obtenerPosicion(e); ctx.lineTo(p.x, p.y); ctx.stroke(); });
+        canvas.addEventListener('mouseup', () => trazando = false);
+        canvas.addEventListener('touchstart', (e) => { trazando = true; ctx.beginPath(); const p = obtenerPosicion(e); ctx.moveTo(p.x, p.y); });
+        canvas.addEventListener('touchmove', (e) => { if(!trazando) return; const p = obtenerPosicion(e); ctx.lineTo(p.x, p.y); ctx.stroke(); });
+        canvas.addEventListener('touchend', () => trazando = false);
+        document.getElementById('btn_limpiar').addEventListener('click', () => ctx.clearRect(0, 0, canvas.width, canvas.height));
 
-        function ajustarResolucionCanvas() {
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
-            ctx.strokeStyle = '#0f172a';
-            ctx.lineWidth = 3;
-            ctx.lineCap = 'round';
-        }
-        window.addEventListener('resize', ajustarResolucionCanvas);
-        setTimeout(ajustarResolucionCanvas, 100);
-
-        function obtenerPosicion(e) {
-            const rect = canvas.getBoundingClientRect();
-            const clienteX = e.touches ? e.touches[0].clientX : e.clientX;
-            const clienteY = e.touches ? e.touches[0].clientY : e.clientY;
-            return { x: clienteX - rect.left, y: clienteY - rect.top };
-        }
-
-        function iniciarTrazo(e) {
-            trazando = true;
-            const pos = obtenerPosicion(e);
-            ctx.beginPath();
-            ctx.moveTo(pos.x, pos.y);
-        }
-
-        function dibujar(e) {
-            if (!trazando) return;
-            e.preventDefault();
-            const pos = obtenerPosicion(e);
-            ctx.lineTo(pos.x, pos.y);
-            ctx.stroke();
-        }
-
-        function finTrazo() { trazando = false; }
-
-        canvas.addEventListener('mousedown', iniciarTrazo);
-        canvas.addEventListener('mousemove', dibujar);
-        window.addEventListener('mouseup', finTrazo);
-
-        canvas.addEventListener('touchstart', iniciarTrazo, {passive: false});
-        canvas.addEventListener('touchmove', dibujar, {passive: false});
-        window.addEventListener('touchend', finTrazo);
-
-        document.getElementById('btn-borrar').addEventListener('click', () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        document.getElementById('no_email').addEventListener('change', function() {
+            const inputEmail = document.getElementById('email'); inputEmail.disabled = this.checked; inputEmail.style.opacity = this.checked ? "0.3" : "1"; if(this.checked) inputEmail.value = "";
         });
 
-        const inputEmail = document.getElementById('email');
-        const checkboxNoEmail = document.getElementById('no_email');
+        function procesarFoto(input, idLabel) {
+            const archivo = input.files[0]; if (!archivo) return;
+            const lector = new FileReader();
+            lector.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvasComp = document.createElement('canvas'); const maxDim = 600; let w = img.width, h = img.height;
+                    if (w > h && w > maxDim) { h *= maxDim / w; w = maxDim; } else if (h > maxDim) { w *= maxDim / h; h = maxDim; }
+                    canvasComp.width = w; canvasComp.height = h; canvasComp.getContext('2d').drawImage(img, 0, 0, w, h);
+                    fotosAlmacenadas[input.id] = canvasComp.toDataURL('image/jpeg', 0.5);
+                    document.getElementById(idLabel).classList.remove('bg-gray-800', 'border-gray-700'); document.getElementById(idLabel).classList.add('bg-emerald-950', 'text-emerald-400', 'border-emerald-500');
+                }; img.src = e.target.result;
+            }; lector.readAsDataURL(archivo);
+        }
 
-        checkboxNoEmail.addEventListener('change', function() {
-            if (this.checked) {
-                inputEmail.value = "";
-                inputEmail.disabled = true;
-                inputEmail.required = false;
-                inputEmail.placeholder = "No se enviará correo";
-            } else {
-                inputEmail.disabled = false;
-                inputEmail.required = true;
-                inputEmail.placeholder = "cliente@email.com";
+        document.getElementById('btn_enviar').addEventListener('click', async () => {
+            const btn = document.getElementById('btn_enviar');
+            const matricula = document.getElementById('matricula').value.trim();
+            const marca_modelo = document.getElementById('marca_modelo').value.trim();
+            const nombre = document.getElementById('nombre').value.trim();
+            const telefono = document.getElementById('telefono').value.trim();
+            const emailCliente = document.getElementById('email').value.trim();
+            const noEmail = document.getElementById('no_email').checked;
+
+            if (!noEmail && (!emailCliente || emailCliente === "")) {
+                alert("❌ Error: Introduzca el correo del cliente o marque 'No tiene email'.");
+                document.getElementById('email').focus();
+                return;
             }
-        });
+            if (!matricula || !nombre || !telefono) { alert('⚠️ Matrícula, Nombre y Teléfono son obligatorios.'); return; }
 
-        document.querySelectorAll('.camera-input').forEach(input => {
-            input.addEventListener('change', function() {
-                if(this.files && this.files[0]) {
-                    const contenedor = this.parentElement;
-                    contenedor.classList.remove('bg-slate-800', 'border-slate-700');
-                    contenedor.classList.add('bg-green-950', 'border-green-500');
-                    const icono = contenedor.querySelector('i');
-                    icono.className = "fa-solid fa-circle-check text-green-400 text-lg mb-1";
-                }
-            });
-        });
+            btn.disabled = true; btn.innerText = "⏳ Guardando e Imprimiendo PDF...";
 
-        document.getElementById('form-recepcion').addEventListener('submit', async function(e) {
-            e.preventDefault();
+            const { jsPDF } = window.jspdf; const doc = new jsPDF();
             
-            const btn = document.getElementById('btn-enviar');
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> Guardando datos...';
-
-            let correoFinal = inputEmail.value.trim();
-            if (checkboxNoEmail.checked) {
-                correoFinal = "notiene@email.com";
+            doc.setFontSize(18); doc.text("RESGUARDO DE RECEPCIÓN - DETAILING PRO", 20, 20);
+            doc.setFontSize(10); 
+            doc.text(`Matrícula: ${matricula.toUpperCase()}`, 20, 35);
+            doc.text(`Vehículo: ${marca_modelo}`, 20, 42);
+            doc.text(`Cliente: ${nombre}`, 20, 49);
+            doc.text(`Teléfono: ${telefono}`, 20, 56);
+            
+            const seleccionados = []; document.querySelectorAll('.opcion-check:checked').forEach(c => seleccionados.push(c.value));
+            doc.text(`Servicios contratados: ${seleccionados.join(', ') || 'Limpieza General'}`, 20, 66);
+            if(document.getElementById('notas_trabajo').value.trim() !== "") {
+                doc.text(`Observaciones: ${document.getElementById('notas_trabajo').value.trim()}`, 20, 73);
             }
 
-            const payload = {
-                nombre_cliente: document.getElementById('nombre_cliente').value,
-                telefono: document.getElementById('telefono').value,
-                email: correoFinal,
-                matricula: document.getElementById('matricula').value.toUpperCase(),
-                modelo: document.getElementById('modelo').value,
-                kilometros: document.getElementById('kilometros').value,
-                servicio: document.querySelector('input[name="servicio"]:checked').value,
-                observaciones: document.getElementById('observaciones').value,
-                firma: canvas.toDataURL()
-            };
+            let ejeYFotos = 85;
+            if (fotosAlmacenadas['foto1']) doc.addImage(fotosAlmacenadas['foto1'], 'JPEG', 20, ejeYFotos, 38, 28);
+            if (fotosAlmacenadas['foto2']) doc.addImage(fotosAlmacenadas['foto2'], 'JPEG', 62, ejeYFotos, 38, 28);
+            if (fotosAlmacenadas['foto3']) doc.addImage(fotosAlmacenadas['foto3'], 'JPEG', 104, ejeYFotos, 38, 28);
+            if (fotosAlmacenadas['foto4']) doc.addImage(fotosAlmacenadas['foto4'], 'JPEG', 146, ejeYFotos, 38, 28);
+
+            let ejeYLegal = 130;
+            doc.setFontSize(8); doc.setFont(undefined, 'bold');
+            doc.text("DOCUMENTO DE DEPÓSITO Y ESTADO DE VEHÍCULO (RGPD)", 20, ejeYLegal);
+            doc.setFont(undefined, 'normal'); doc.setFontSize(7.5);
+            const parrafo = "De conformidad con el Reglamento General de Protección de Datos (RGPD), los datos recogidos en este documento serán tratados de forma confidencial para la gestión del servicio. El cliente autoriza expresamente el movimiento del vehículo dentro del recinto para las fases del tratamiento de detallado.";
+            const lineas = doc.splitTextToSize(parrafo, 170); doc.text(lineas, 20, ejeYLegal + 5);
+            
+            let ejeYFirma = 160;
+            doc.setFontSize(9); doc.setFont(undefined, 'bold'); doc.text("Firma de Conformidad:", 20, ejeYFirma);
+            
+            const tempCanvas = document.createElement('canvas'); tempCanvas.width = canvas.width; tempCanvas.height = canvas.height;
+            const tCtx = tempCanvas.getContext('2d'); tCtx.drawImage(canvas, 0, 0);
+            tCtx.globalCompositeOperation = 'source-in'; tCtx.fillStyle = '#1e3a8a'; tCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+            
+            const firmaImg = tempCanvas.toDataURL('image/png'); 
+            doc.addImage(firmaImg, 'PNG', 20, ejeYFirma + 3, 55, 22);
+
+            const pdfBase64 = doc.output('datauristring').split(',')[1];
 
             try {
-                // USA DIRECCIÓN RELATIVA APUNTANDO AL SERVIDOR REAL
-                const respuesta = await fetch('/api/send', {
+                const res = await fetch('/api/send', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify({ matricula, nombre, telefono, emailCliente: noEmail ? "" : emailCliente, trabajos: seleccionados.join(', '), pdfBase64 })
                 });
 
-                const resultado = await respuesta.json();
-
-                if (resultado.success) {
-                    alert("¡Recepción guardada! Documentación enviada por correo.");
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    document.getElementById('form-recepcion').reset();
-                    inputEmail.disabled = false;
-                    inputEmail.required = true;
-                    inputEmail.placeholder = "cliente@email.com";
-                    checkboxNoEmail.checked = false;
-                    
-                    document.querySelectorAll('.camera-input').forEach(input => {
-                        const contenedor = input.parentElement;
-                        contenedor.classList.remove('bg-green-950', 'border-green-500');
-                        contenedor.classList.add('bg-slate-800', 'border-slate-700');
-                        const icono = contenedor.querySelector('i');
-                        icono.className = "fa-solid fa-image text-slate-500 text-lg mb-1";
-                    });
+                if (res.ok) {
+                    alert('✅ ¡Perfecto! PDF generado y resguardo enviado al correo.');
+                    location.reload();
                 } else {
-                    alert("Error del servidor: " + resultado.error);
+                    alert('❌ Error guardando el registro.');
+                    btn.disabled = false; btn.innerText = "Finalizar y Guardar Registro";
                 }
-            } catch (err) {
-                alert("Error de conexión con el servidor. Inténtalo de nuevo.");
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Procesar Recepción Pro';
+            } catch (e) {
+                alert('❌ Error de conexión.');
+                btn.disabled = false; btn.innerText = "Finalizar y Guardar Registro";
             }
         });
     </script>

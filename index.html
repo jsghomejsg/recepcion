@@ -38,9 +38,13 @@
                         <input type="text" id="matricula" placeholder="1234XYZ" class="w-full uppercase p-3 bg-gray-800 text-white border border-gray-700 rounded-xl font-mono text-lg font-bold tracking-wider">
                     </div>
                     <div>
-                        <label class="block text-xs font-medium text-gray-400 mb-1">Marca y Modelo</label>
-                        <input type="text" id="marca_modelo" placeholder="Golf / Leon" class="w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-xl font-bold">
+                        <label class="block text-xs font-medium text-gray-400 mb-1">Kilómetros</label>
+                        <input type="number" id="kilometros" placeholder="150000" class="w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-xl font-mono text-lg font-bold tracking-wider">
                     </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-400 mb-1">Marca y Modelo</label>
+                    <input type="text" id="marca_modelo" placeholder="Golf / Leon / R8" class="w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-xl font-bold">
                 </div>
                 <div>
                     <label class="block text-xs font-medium text-gray-400 mb-1">Nombre del Cliente</label>
@@ -61,24 +65,30 @@
                 </div>
             </div>
 
-            <!-- 2. SERVICIOS -->
+            <!-- 2. SERVICIOS (LAVADOS Y DETAILING) -->
             <div class="bg-gray-900 p-5 rounded-2xl shadow-2xl border border-gray-800 space-y-4">
                 <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider">2. Servicios Contratados</h2>
                 <div class="grid grid-cols-2 gap-2">
                     <label class="opcion-tarjeta flex items-center justify-center p-2 bg-gray-800 border border-gray-700 rounded-xl text-[11px] font-medium text-gray-300 cursor-pointer h-12 text-center transition">
-                        <input type="checkbox" class="opcion-check" value="Lavado Premium Integral"> Lavado Integral
+                        <input type="checkbox" class="opcion-check" value="Lavado Básico"> Lavado Básico
+                    </label>
+                    <label class="opcion-tarjeta flex items-center justify-center p-2 bg-gray-800 border border-gray-700 rounded-xl text-[11px] font-medium text-gray-300 cursor-pointer h-12 text-center transition">
+                        <input type="checkbox" class="opcion-check" value="Lavado Plus"> Lavado Plus
+                    </label>
+                    <label class="opcion-tarjeta flex items-center justify-center p-2 bg-gray-800 border border-gray-700 rounded-xl text-[11px] font-medium text-gray-300 cursor-pointer h-12 text-center transition">
+                        <input type="checkbox" class="opcion-check" value="Lavado Premium"> Lavado Premium
                     </label>
                     <label class="opcion-tarjeta flex items-center justify-center p-2 bg-gray-800 border border-gray-700 rounded-xl text-[11px] font-medium text-gray-300 cursor-pointer h-12 text-center transition">
                         <input type="checkbox" class="opcion-check" value="Corrección de Pintura / Pulido"> Pulido Detallado
                     </label>
                     <label class="opcion-tarjeta flex items-center justify-center p-2 bg-gray-800 border border-gray-700 rounded-xl text-[11px] font-medium text-gray-300 cursor-pointer h-12 text-center transition">
-                        <input type="checkbox" class="opcion-check" value="Tratamiento Cerámico Coated"> Cerámico Coating
+                        <input type="checkbox" class="opcion-check" value="Tratamiento Cerámico Coating"> Cerámico Coating
                     </label>
                     <label class="opcion-tarjeta flex items-center justify-center p-2 bg-gray-800 border border-gray-700 rounded-xl text-[11px] font-medium text-gray-300 cursor-pointer h-12 text-center transition">
-                        <input type="checkbox" class="opcion-check" value="Limpieza de Tapicería"> Tapicería Profunda
+                        <input type="checkbox" class="opcion-check" value="Limpieza de Tapicería Profunda"> Tapicería Profunda
                     </label>
                 </div>
-                <textarea id="notas_trabajo" rows="2" placeholder="Defectos observados (Arañazos, abolladuras...)" class="w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-xl text-sm"></textarea>
+                <textarea id="notas_trabajo" rows="2" placeholder="Defectos observados (Arañazos, abolladuras, estado de llantas...)" class="w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-xl text-sm"></textarea>
             </div>
 
             <!-- 3. FOTOS -->
@@ -86,34 +96,37 @@
                 <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider">3. Estado Visual (Fotos Evidencia)</h2>
                 <div class="grid grid-cols-2 gap-3">
                     <label class="flex flex-col items-center justify-center h-20 bg-gray-800 rounded-xl border border-dashed border-gray-700 cursor-pointer transition" id="lbl_foto1">
-                        <span class="text-[9px] text-gray-400">FRONTAL</span>
+                        <span class="text-[11px] font-bold text-gray-400">FOTO 1</span>
                         <input type="file" id="foto1" accept="image/*" capture="camera" onchange="procesarFoto(this, 'lbl_foto1')">
                     </label>
                     <label class="flex flex-col items-center justify-center h-20 bg-gray-800 rounded-xl border border-dashed border-gray-700 cursor-pointer transition" id="lbl_foto2">
-                        <span class="text-[9px] text-gray-400">TRASERA</span>
+                        <span class="text-[11px] font-bold text-gray-400">FOTO 2</span>
                         <input type="file" id="foto2" accept="image/*" capture="camera" onchange="procesarFoto(this, 'lbl_foto2')">
                     </label>
                     <label class="flex flex-col items-center justify-center h-20 bg-gray-800 rounded-xl border border-dashed border-gray-700 cursor-pointer transition" id="lbl_foto3">
-                        <span class="text-[9px] text-gray-400">LATERAL IZQ.</span>
+                        <span class="text-[11px] font-bold text-gray-400">FOTO 3</span>
                         <input type="file" id="foto3" accept="image/*" capture="camera" onchange="procesarFoto(this, 'lbl_foto3')">
                     </label>
                     <label class="flex flex-col items-center justify-center h-20 bg-gray-800 rounded-xl border border-dashed border-gray-700 cursor-pointer transition" id="lbl_foto4">
-                        <span class="text-[9px] text-gray-400">LATERAL DER.</span>
+                        <span class="text-[11px] font-bold text-gray-400">FOTO 4</span>
                         <input type="file" id="foto4" accept="image/*" capture="camera" onchange="procesarFoto(this, 'lbl_foto4')">
                     </label>
                 </div>
             </div>
 
-            <!-- 4. FIRMA -->
+            <!-- 4. FIRMA Y LEGAL EXTENSO -->
             <div class="bg-gray-900 p-5 rounded-2xl shadow-2xl border border-gray-800 space-y-4">
                 <div class="flex justify-between items-center mb-1">
                     <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider">4. Términos Legales y Firma</h2>
                     <button type="button" id="btn_limpiar" class="text-[10px] bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-300 py-1 px-2.5 rounded-lg font-medium transition">Borrar Firma</button>
                 </div>
-                <div class="bg-gray-950 p-3 rounded-xl border border-gray-850 h-24 overflow-y-auto text-[10px] text-gray-400 space-y-2">
-                    <p class="font-bold text-gray-300 uppercase text-[9px]">Documento de Depósito y Estado de Vehículo - Detailing</p>
-                    <p>De conformidad con el RGPD, los datos recogidos se tratarán exclusivamente para la orden de servicio contratada. El cliente autoriza la manipulación del vehículo dentro del centro para el correcto desarrollo de las fases de acondicionado, lavado y detallado estipuladas.</p>
+                <div class="bg-gray-950 p-3 rounded-xl border border-gray-850 h-32 overflow-y-auto text-[10px] text-gray-400 space-y-2 scrollbar-thin scrollbar-thumb-gray-800">
+                    <p class="font-bold text-gray-300 uppercase text-[9px]">Documento de Depósito, Consentimiento de Manipulación y Protección de Datos</p>
+                    <p>En cumplimiento de lo dispuesto por el Reglamento General de Protección de Datos (RGPD) y la normativa nacional vigente, se le informa de que los datos de carácter personal recabados en este formulario técnico serán tratados de forma estrictamente confidencial y automatizada con la única finalidad de gestionar el control de entradas, la realización de las tareas estéticas o de detallado contratadas, el seguimiento de calidad y la posterior facturación del servicio.</p>
+                    <p>El cliente firmante declara bajo su total responsabilidad ser el propietario legítimo del vehículo identificado o, en su defecto, encontrarse plenamente autorizado por el titular legal para solicitar las intervenciones estipuladas en esta hoja técnica. Mediante la suscripción de este documento, el cliente autoriza expresamente la manipulación, arranque y conducción del vehículo dentro del recinto del centro, así como en las vías públicas exteriores inmediatas si resultase estrictamente necesario para el correcto desarrollo del servicio de acondicionado, secado, pruebas dinámicas o verificación de tratamientos.</p>
+                    <p>El establecimiento no responderá por la pérdida, extravío o daños de objetos personales, dispositivos electrónicos, dinero en efectivo o enseres de valor que hayan sido depositados o dejados en el interior del habitáculo o del maletero del vehículo si no fueron expresamente declarados por escrito ante los operarios del taller en el momento exacto de la recepción física del coche.</p>
                 </div>
+
                 <div class="bg-gray-950 rounded-xl border border-gray-800 overflow-hidden">
                     <canvas id="canvas_firma" class="w-full h-32 bg-gray-950 block" width="350" height="128"></canvas>
                 </div>
@@ -166,6 +179,7 @@
         document.getElementById('btn_enviar').addEventListener('click', async () => {
             const btn = document.getElementById('btn_enviar');
             const matricula = document.getElementById('matricula').value.trim();
+            const kilometros = document.getElementById('kilometros').value.trim();
             const marca_modelo = document.getElementById('marca_modelo').value.trim();
             const nombre = document.getElementById('nombre').value.trim();
             const telefono = document.getElementById('telefono').value.trim();
@@ -185,28 +199,29 @@
             doc.setFontSize(18); doc.text("RESGUARDO DE RECEPCIÓN - DETAILING PRO", 20, 20);
             doc.setFontSize(10); 
             doc.text(`Matrícula: ${matricula.toUpperCase()}`, 20, 35);
-            doc.text(`Vehículo: ${marca_modelo}`, 20, 42);
-            doc.text(`Cliente: ${nombre}`, 20, 49);
-            doc.text(`Teléfono: ${telefono}`, 20, 56);
+            doc.text(`Kilómetros: ${kilometros || '---'} km`, 20, 42);
+            doc.text(`Vehículo: ${marca_modelo}`, 20, 49);
+            doc.text(`Cliente: ${nombre}`, 20, 56);
+            doc.text(`Teléfono: ${telefono}`, 20, 63);
             
             const seleccionados = []; document.querySelectorAll('.opcion-check:checked').forEach(c => seleccionados.push(c.value));
-            doc.text(`Servicios: ${seleccionados.join(', ') || 'Limpieza'}`, 20, 66);
+            doc.text(`Servicios: ${seleccionados.join(', ') || 'Limpieza / Detailing'}`, 20, 73);
             if(document.getElementById('notas_trabajo').value.trim() !== "") {
-                doc.text(`Observaciones: ${document.getElementById('notas_trabajo').value.trim()}`, 20, 73);
+                doc.text(`Observaciones: ${document.getElementById('notas_trabajo').value.trim()}`, 20, 80);
             }
 
-            let ejeYFotos = 85;
+            let ejeYFotos = 90;
             if (fotosAlmacenadas['foto1']) doc.addImage(fotosAlmacenadas['foto1'], 'JPEG', 20, ejeYFotos, 38, 28);
             if (fotosAlmacenadas['foto2']) doc.addImage(fotosAlmacenadas['foto2'], 'JPEG', 62, ejeYFotos, 38, 28);
             if (fotosAlmacenadas['foto3']) doc.addImage(fotosAlmacenadas['foto3'], 'JPEG', 104, ejeYFotos, 38, 28);
             if (fotosAlmacenadas['foto4']) doc.addImage(fotosAlmacenadas['foto4'], 'JPEG', 146, ejeYFotos, 38, 28);
 
-            let ejeYLegal = 130;
+            let ejeYLegal = 135;
             doc.setFontSize(8); doc.text("DOCUMENTO DE DEPÓSITO Y ESTADO DE VEHÍCULO (RGPD)", 20, ejeYLegal);
-            const parrafo = "De conformidad con el Reglamento General de Protección de Datos (RGPD), los datos recogidos en este documento serán tratados de forma confidencial para la gestión del servicio.";
+            const parrafo = "De conformidad con el RGPD, los datos se tratarán de forma confidencial para la gestión del servicio. El cliente autoriza la manipulación del vehículo dentro del centro para el correcto desarrollo de las fases estipuladas. El establecimiento no responde por objetos de valor no declarados.";
             const lineas = doc.splitTextToSize(parrafo, 170); doc.text(lineas, 20, ejeYLegal + 5);
             
-            let ejeYFirma = 150;
+            let ejeYFirma = 155;
             const tempCanvas = document.createElement('canvas'); tempCanvas.width = canvas.width; tempCanvas.height = canvas.height;
             const tCtx = tempCanvas.getContext('2d'); tCtx.drawImage(canvas, 0, 0);
             tCtx.globalCompositeOperation = 'source-in'; tCtx.fillStyle = '#1e3a8a'; tCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);

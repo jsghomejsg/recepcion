@@ -25,25 +25,24 @@ export default async function handler(req, res) {
             },
         });
 
-        // Si no hay correo de cliente, se autoenvía a ti mismo para romper bucles
         const correoDestino = (emailCliente && emailCliente.trim() !== "") ? emailCliente.trim() : process.env.GMAIL_USER;
 
         const mailOptions = {
             from: `"Resguardo Detailing" <${process.env.GMAIL_USER}>`,
             to: correoDestino,
-            bcc: process.env.GMAIL_USER, // Te llega copia oculta directa a ti siempre
+            bcc: process.env.GMAIL_USER, 
             subject: `📄 Resguardo de Recepción - ${(matricula || 'N/A').toUpperCase()}`,
             html: `
                 <div style="font-family: sans-serif; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
                     <h2 style="color: #1e3a8a;">RECEPCIÓN DETAILING PRO</h2>
-                    <p>Estimado/a cliente, le adjuntamos el resguardo oficial de depósito y estado de su vehículo en formato PDF.</p>
+                    <p>Estimado/a cliente, le adjuntamos el resguardo oficial de depósito de su vehículo en formato PDF.</p>
                     <hr style="border: none; border-top: 1px solid #eee;" />
                     <p><strong>🚗 Matrícula:</strong> ${(matricula || 'N/A').toUpperCase()}</p>
                     <p><strong>👤 Cliente:</strong> ${nombre}</p>
                     <p><strong>📞 Teléfono:</strong> ${telefono}</p>
                     <p><strong>🛠️ Servicios:</strong> ${trabajos || 'General'}</p>
                     <hr style="border: none; border-top: 1px solid #eee;" />
-                    <p style="font-size: 11px; color: #777;">Abra el archivo PDF adjunto para visualizar la orden de taller completa con las fotos y firmas.</p>
+                    <p style="font-size: 11px; color: #777;">En la parte inferior de este correo encontrará el documento PDF oficial con las fotos y firmas correspondientes.</p>
                 </div>
             `,
             attachments: [
@@ -59,6 +58,6 @@ export default async function handler(req, res) {
         return res.status(200).json({ success: true });
 
     } catch (error) {
-        return res.status(500).json({ success: false, error: "Error en el motor de correo: " + error.message });
+        return res.status(500).json({ success: false, error: "Error en el servidor: " + error.message });
     }
 }
